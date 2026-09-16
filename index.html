@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQBJEYWXE0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-ZQBJEYWXE0');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image-to-Point Cloud Registration (IROS 2026)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/f47cb5070b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container my-5">
+
+    <!-- Title -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2>
+          TBT <br>
+          TBT
+        </h2>
+      </div>
+    </div>
+
+    <!-- Venue -->
+    <div class="row mt-2">
+      <div class="col-12 text-center">
+        <h5 class="text-muted">IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2026)</h5>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Teaser GIFs -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="ratio ratio-16x9">
+          <img src="images/upsampling/sparse.gif" alt="Sparse LiDAR" class="img-fluid" style="object-fit: cover; width:100%; height:100%;">
+        </div>
+        <p class="text-center mt-1 text-muted small">Input Image</p>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="ratio ratio-16x9">
+          <img src="images/upsampling/dense.gif" alt="Dense LiDAR" class="img-fluid" style="object-fit: cover; width:100%; height:100%;">
+        </div>
+        <p class="text-center mt-1 text-muted small">Generated Image</p>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Abstract -->
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3 text-center">Abstract</h4>
+        <p class="text-justify">
+          Image-to-Point Cloud Registration (I2P) is essential for integrating camera and LiDAR in perception and autonomous systems, yet the modality gap between images and point clouds makes it difficult to achieve both high accuracy and strong generalization.
+          In this paper, we propose a simple yet effective I2P method that treats LiDAR as an imaging sensor: from a single sparse LiDAR scan, we generate a dense LiDAR intensity image using Conditional Rectified Flow, match it with a camera image using a pre-trained feature matcher, and estimate the 6-DoF relative pose via PnP-RANSAC.
+          The proposed model is pre-trained through a self-supervised image completion task and fine-tuned on a small amount of LiDAR data (neither image-point cloud pairs nor ground-truth sensor poses are required), enabling it to scale to diverse LiDAR and camera configurations.
+          Experiments on the R2LIVE dataset show that the proposed method achieves a mean error of 4.89° / 1.63 m, outperforming existing methods, while completing a single registration in approximately 0.68 s.
+        </p>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- System Overview -->
+    <div class="row">
+      <div class="col-12 d-flex flex-column align-items-center">
+        <h4 class="mb-3">System Overview</h4>
+        <p class="text-justify">
+          Overview of the proposed Image-to-Point Cloud registration pipeline. Given a sparse LiDAR scan and a camera image, the Conditional Rectified Flow module generates a dense LiDAR intensity image, which is then matched to the camera image via feature matching.
+          The resulting 2D-3D correspondences are fed into PnP-RANSAC to estimate the 6-DoF relative pose.</p>
+        <img src="images/pipeline.jpg" alt="System Overview" class="img-fluid" style="max-width:90%;">
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Model Architecture -->
+    <div class="row">
+      <div class="col-12 d-flex flex-column align-items-center">
+        <h4 class="mb-3">Model Architecture</h4>
+        <img src="images/model.jpg" alt="Model Architecture" class="img-fluid" style="max-width:90%;">
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Registration Experiments -->
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3 text-center">Registration Experiments</h4>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-6 col-md-3 mb-3">
+        <div class="ratio ratio-16x9">
+          <img src="images/gt.gif" alt="GT" class="img-fluid" style="object-fit: cover; width:100%; height:100%;">
+        </div>
+        <p class="text-center mt-2 mb-0 fs-5">GT</p>
+      </div>
+      <div class="col-6 col-md-3 mb-3">
+        <div class="ratio ratio-16x9">
+          <img src="images/rf.gif" alt="Ours" class="img-fluid" style="object-fit: cover; width:100%; height:100%;">
+        </div>
+        <p class="text-center mt-2 mb-0 fs-5">Ours</p>
+      </div>
+      <div class="col-6 col-md-3 mb-3">
+        <div class="ratio ratio-16x9">
+          <img src="images/2d3dmatr.gif" alt="2D3D-MATR" class="img-fluid" style="object-fit: cover; width:100%; height:100%;">
+        </div>
+        <p class="text-center mt-2 mb-0 fs-5">2D3D-MATR</p>
+      </div>
+      <div class="col-6 col-md-3 mb-3">
+        <div class="ratio ratio-16x9">
+          <img src="images/freereg.gif" alt="FreeReg" class="img-fluid" style="object-fit: cover; width:100%; height:100%;">
+        </div>
+        <p class="text-center mt-2 mb-0 fs-5">FreeReg</p>
+      </div>
+    </div>
+
+    <!-- Video (placeholder, uncomment when ready) -->
+    <!--
+    <hr class="my-4">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="mb-3">Video</h4>
+        <div class="ratio ratio-16x9">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Supplementary Video" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    -->
+
+    <br><br>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
