@@ -4,7 +4,7 @@ Project page for the ICRA 2027 submission:
 
 > FREE-LIVO: Physically Decoupled Yet Tightly Coupled LiDAR-Inertial-Visual Odometry
 
-The site is intentionally framework-free. To preview it locally, run:
+The site is intentionally built with only static HTML and CSS. To preview it locally, run:
 
 ```bash
 python3 -m http.server 8000
