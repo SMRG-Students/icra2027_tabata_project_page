@@ -5,14 +5,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description"
-    content="FREE-LIVO is a tightly coupled LiDAR-inertial-visual odometry system that works without a fixed LiDAR-camera rig or time synchronization.">
-  <meta property="og:title" content="FREE-LIVO — ICRA 2027">
-  <meta property="og:description"
-    content="Physically decoupled yet tightly coupled LiDAR-inertial-visual odometry.">
+  <meta name="description" content="FREE-LIVO: Physically Decoupled Yet Tightly Coupled LiDAR-Inertial-Visual Odometry">
+  <meta property="og:title" content="FREE-LIVO: Physically Decoupled Yet Tightly Coupled LiDAR-Inertial-Visual Odometry">
+  <meta property="og:description" content="FREE-LIVO: Physically Decoupled Yet Tightly Coupled LiDAR-Inertial-Visual Odometry">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/hero-overview.webp">
-  <title>FREE-LIVO — ICRA 2027</title>
+  <title>FREE-LIVO: Physically Decoupled Yet Tightly Coupled LiDAR-Inertial-Visual Odometry</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./project-page-9f3c.css">
 </head>
@@ -20,220 +18,88 @@
 <body>
   <main class="page">
     <header class="paper-header">
-      <div class="hero-copy">
-        <p class="venue">ICRA 2027</p>
-        <h1>FREE-LIVO</h1>
-        <p class="paper-title">Physically Decoupled Yet Tightly Coupled<br>LiDAR-Inertial-Visual Odometry</p>
-        <p class="tagline">LiDAR and camera no longer have to move—or tick—as one.</p>
-        <ul class="key-points" aria-label="Key capabilities">
-          <li>No fixed LiDAR–camera rig</li>
-          <li>No time synchronization</li>
-          <li>One tightly coupled factor graph</li>
-        </ul>
-      </div>
-
-      <figure class="main-figure">
-        <img src="assets/hero-overview.webp"
-          alt="LiDAR and camera held separately, a colored point cloud, and jointly estimated trajectories"
-          width="1552" height="871">
-        <figcaption>Joint estimation with independently moving LiDAR and camera sensors.</figcaption>
-      </figure>
+      <h1>FREE-LIVO: Physically Decoupled Yet Tightly Coupled<br>LiDAR-Inertial-Visual Odometry</h1>
     </header>
 
-    <section class="section abstract-section" id="abstract">
-      <div class="section-heading">
-        <span>01</span>
-        <h2>Abstract</h2>
-      </div>
-      <div class="abstract-content">
-        <div class="abstract-text">
-          <p>
-            LiDAR-Inertial-Visual Odometry (LIVO) integrates complementary LiDAR, camera, and IMU measurements to
-            achieve robust state estimation. However, most existing methods assume a fixed relative pose and
-            accurate time synchronization between sensors. Toward modular and heterogeneous robotic systems, this
-            paper presents FREE-LIVO, a tightly coupled odometry method that requires neither a rigid LiDAR–camera
-            rig nor LiDAR–camera time synchronization. The proposed method uses a pretrained image feature matcher
-            to establish correspondences between a camera image and a dense LiDAR intensity image generated from a
-            single LiDAR scan using a generative model. From the resulting 3D point-to-pixel correspondences, we
-            construct reprojection factors that directly constrain LiDAR and camera poses at different acquisition
-            times. These factors are jointly optimized in a single factor graph together with constraints from
-            point cloud registration, visual feature tracking, and the IMU measurements associated with each
-            sensor. On six sequences from the public M3DGR dataset, FREE-LIVO achieves an average absolute
-            trajectory error (ATE) RMSE of 0.45 m without provided LiDAR–camera extrinsic parameters and exhibits
-            minimal accuracy degradation under time synchronization errors of up to 0.5 s. Furthermore,
-            experiments with the LiDAR and camera mounted on separate robots demonstrate that the method can
-            jointly estimate the trajectories of independently moving sensors.
-          </p>
-        </div>
-        <div class="highlights">
-          <div><strong>0.45 m</strong><span>Mean ATE</span></div>
-          <div><strong>0.5 s</strong><span>Delay tested</span></div>
-          <div><strong>2 robots</strong><span>Independent motion</span></div>
-          <div><strong>0</strong><span>Rig extrinsics</span></div>
-        </div>
-      </div>
+    <figure class="teaser">
+      <img src="assets/hero-overview.webp"
+        alt="FREE-LIVO estimation results with a physically decoupled LiDAR and camera."
+        width="1552" height="871">
+      <figcaption>FREE-LIVO estimation results with a physically decoupled LiDAR and camera.
+        (a) The LiDAR and camera are held in separate hands.
+        (b) A colored point cloud of an outdoor environment generated using the estimated sensor poses.
+        (c) Jointly estimated trajectories of the independently moving LiDAR and camera.</figcaption>
+    </figure>
+
+    <section id="abstract">
+      <h2>Abstract</h2>
+      <p>LiDAR-Inertial-Visual Odometry (LIVO) integrates complementary LiDAR, camera, and IMU measurements to achieve robust state estimation. However, most existing methods assume a fixed relative pose and accurate time synchronization between sensors. Toward modular and heterogeneous robotic systems, this paper presents FREE-LIVO, a tightly coupled odometry method that requires neither a rigid LiDAR–camera rig nor LiDAR–camera time synchronization. The proposed method uses a pretrained image feature matcher to establish correspondences between a camera image and a dense LiDAR intensity image generated from a single LiDAR scan using a generative model. From the resulting 3D point-to-pixel correspondences, we construct reprojection factors that directly constrain LiDAR and camera poses at different acquisition times. These factors are jointly optimized in a single factor graph together with constraints from point cloud registration, visual feature tracking, and the IMU measurements associated with each sensor. On six sequences from the public M3DGR dataset, FREE-LIVO achieves an average absolute trajectory error (ATE) RMSE of 0.45 m without provided LiDAR–camera extrinsic parameters and exhibits minimal accuracy degradation under time synchronization errors of up to 0.5 s. Furthermore, experiments with the LiDAR and camera mounted on separate robots demonstrate that the method can jointly estimate the trajectories of independently moving sensors.</p>
     </section>
 
-    <section class="section method-section" id="method">
-      <div class="section-heading">
-        <span>02</span>
-        <h2>Method</h2>
-      </div>
-
-      <figure class="figure-card pipeline-figure">
-        <img src="assets/system-pipeline.webp"
-          alt="FREE-LIVO pipeline from LiDAR and camera measurements to factor graph optimization"
-          width="1729" height="434">
-        <figcaption>FREE-LIVO system overview.</figcaption>
+    <section id="method">
+      <h2>Proposed Pipeline</h2>
+      <figure>
+        <img src="assets/system-pipeline.webp" alt="Overview of FREE-LIVO."
+          width="1729" height="434" loading="lazy">
+        <figcaption>Overview of FREE-LIVO. Upsampled LiDAR intensity images are matched with camera images
+          to obtain 2D–3D correspondences. These are integrated with LiDAR, visual, and IMU constraints in a
+          single factor graph to jointly estimate sensor trajectories without a fixed LiDAR–camera rig or
+          time synchronization.</figcaption>
       </figure>
+    </section>
 
-      <div class="method-columns">
-        <article class="method-block">
-          <h3>LiDAR–Camera Matching</h3>
-          <p>
-            Conditional Rectified Flow completes the sparse intensity projection. SuperPoint and LightGlue then
-            find correspondences with the camera image.
-          </p>
-          <div class="matching-grid">
-            <figure class="figure-card">
-              <img src="assets/sparse-intensity.svg" alt="Sparse LiDAR intensity image">
-              <figcaption><b>1.</b> Sparse intensity</figcaption>
-            </figure>
-            <figure class="figure-card">
-              <img src="assets/dense-intensity.svg" alt="Generated dense LiDAR intensity image">
-              <figcaption><b>2.</b> Dense intensity</figcaption>
-            </figure>
-            <figure class="figure-card">
-              <img src="assets/cross-modal-matches.svg"
-                alt="Feature correspondences between LiDAR intensity and camera images">
-              <figcaption><b>3.</b> Image matches</figcaption>
-            </figure>
-          </div>
-        </article>
-
-        <article class="method-block">
-          <h3>Tightly Coupled Factor Graph</h3>
-          <p>
-            Reprojection factors constrain LiDAR and camera poses directly without requiring equal timestamps or
-            a fixed transformation between the sensors.
-          </p>
-          <div class="factor-grid">
-            <figure class="figure-card">
-              <img src="assets/reprojection-factor.webp"
-                alt="Geometry of the LiDAR-camera reprojection factor" width="1656" height="688">
-              <figcaption>Reprojection factor</figcaption>
-            </figure>
-            <figure class="figure-card">
-              <img src="assets/factor-graph.webp" alt="FREE-LIVO sliding-window factor graph"
-                width="1717" height="1528">
-              <figcaption>Sliding-window graph</figcaption>
-            </figure>
-          </div>
-        </article>
+    <section id="factor-graph">
+      <h2>Factor Graph Optimization</h2>
+      <div class="factor-figures">
+        <figure>
+          <img src="assets/factor-graph.webp" alt="Sliding-window factor graph of FREE-LIVO."
+            width="1717" height="1528" loading="lazy">
+          <figcaption>Sliding-window factor graph of FREE-LIVO. LiDAR–camera reprojection factors connect
+            the LiDAR and camera state sequences. States outside the optimization window are marginalized.
+            For clarity, only factors involving the latest LiDAR or camera state are shown.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/reprojection-factor.webp" alt="LiDAR–camera reprojection factor."
+            width="1656" height="688" loading="lazy">
+          <figcaption>LiDAR–camera reprojection factor. The reprojection error between a projected 3D LiDAR
+            point and its corresponding image feature jointly constrains the LiDAR and camera poses.</figcaption>
+        </figure>
       </div>
     </section>
 
-    <section class="section results-section" id="results">
-      <div class="section-heading">
-        <span>03</span>
-        <h2>Results</h2>
-      </div>
-
-      <div class="results-grid">
-        <article class="result-block">
-          <h3>Robust to Time Offsets</h3>
-          <p>
-            With an added 0.3 s camera delay, FREE-LIVO preserves alignment between image color and LiDAR geometry.
-          </p>
-          <figure class="figure-card delay-figure">
-            <img src="assets/time-offset-results.webp"
-              alt="Comparison of R3LIVE, FAST-LIVO2, and FREE-LIVO with a 0.3 second camera delay"
-              width="1287" height="718">
-            <figcaption>Colored point clouds with and without a 0.3 s camera delay.</figcaption>
-          </figure>
-        </article>
-
-        <article class="result-block accuracy-block">
-          <h3>M3DGR Trajectory Accuracy</h3>
-          <p>
-            Mean translational ATE RMSE is <strong>0.45 m</strong> across six indoor and outdoor sequences without
-            supplied LiDAR–camera extrinsics.
-          </p>
-          <div class="accuracy-summary">
-            <strong>0.45 <small>m</small></strong>
-            <span>Mean ATE on six sequences</span>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr><th>Sequence</th><th>ATE [m]</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Outdoor01</td><td>0.18</td></tr>
-                <tr><td>Outdoor04</td><td>0.40</td></tr>
-                <tr><td>Dynamic01</td><td>0.98</td></tr>
-                <tr><td>Dynamic02</td><td>0.56</td></tr>
-                <tr><td>Dynamic03</td><td>0.25</td></tr>
-                <tr><td>Dynamic04</td><td>0.32</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </article>
-      </div>
+    <section id="results">
+      <h2>Robustness to LiDAR–Camera Synchronization Errors</h2>
+      <figure>
+        <img src="assets/time-offset-results.webp"
+          alt="Colored point clouds generated by R3LIVE, FAST-LIVO2, and FREE-LIVO on the FAST-LIVO2 dataset"
+          width="1287" height="718" loading="lazy">
+        <figcaption>Colored point clouds generated by R3LIVE, FAST-LIVO2, and FREE-LIVO on the FAST-LIVO2
+          dataset, with and without an added 0.3 s camera delay. FREE-LIVO maintains alignment between image
+          colors and LiDAR geometry under the delay.</figcaption>
+      </figure>
     </section>
 
-    <section class="section experiments-section" id="experiments">
-      <div class="section-heading">
-        <span>04</span>
-        <h2>Physically Decoupled Sensors</h2>
-      </div>
-
-      <div class="experiments-grid">
-        <article class="experiment-block">
-          <h3>Held in Separate Hands</h3>
-          <p>Both trajectories are estimated while the relative sensor pose changes continuously.</p>
-          <div class="experiment-gallery">
-            <figure class="figure-card dark-figure">
-              <img src="assets/handheld-outdoor.svg" alt="Outdoor colored point cloud from handheld sensors">
-              <figcaption>Outdoor</figcaption>
-            </figure>
-            <figure class="figure-card dark-figure">
-              <img src="assets/handheld-building.svg" alt="Building-scale colored point cloud from handheld sensors">
-              <figcaption>Building</figcaption>
-            </figure>
-            <figure class="figure-card dark-figure">
-              <img src="assets/handheld-indoor.svg" alt="Indoor colored point cloud from handheld sensors">
-              <figcaption>Indoor</figcaption>
-            </figure>
-          </div>
-        </article>
-
-        <article class="experiment-block">
-          <h3>Mounted on Separate Robots</h3>
-          <p>A rover and a legged robot move independently while both paths are recovered in a shared frame.</p>
-          <div class="experiment-gallery">
-            <figure class="figure-card">
-              <img src="assets/two-robot-setup.svg" alt="Rover and legged robot carrying separate sensors">
-              <figcaption>Setup</figcaption>
-            </figure>
-            <figure class="figure-card">
-              <img src="assets/two-robot-online.svg" alt="Online map and pose estimation during the two-robot run">
-              <figcaption>Online</figcaption>
-            </figure>
-            <figure class="figure-card">
-              <img src="assets/two-robot-trajectories.svg"
-                alt="Final LiDAR and camera trajectories from two robots">
-              <figcaption>Trajectories</figcaption>
-            </figure>
-          </div>
-        </article>
-      </div>
+    <section id="experiments">
+      <h2>Evaluation with Physically Decoupled Sensors</h2>
+      <figure>
+        <div class="image-row">
+          <img src="assets/handheld-outdoor.svg" alt="(a)" loading="lazy">
+          <img src="assets/handheld-building.svg" alt="(b)" loading="lazy">
+          <img src="assets/handheld-indoor.svg" alt="(c)" loading="lazy">
+        </div>
+        <figcaption>Colored point clouds generated by FREE-LIVO with the LiDAR and camera held in separate hands.</figcaption>
+      </figure>
+      <figure>
+        <div class="image-row">
+          <img src="assets/two-robot-setup.svg" alt="LiDAR and camera units mounted on separate robots." loading="lazy">
+          <img src="assets/two-robot-online.svg" alt="Online estimation during operation." loading="lazy">
+          <img src="assets/two-robot-trajectories.svg" alt="Final estimated trajectories." loading="lazy">
+        </div>
+        <figcaption>FREE-LIVO estimation with two independently moving robots.
+          (a) LiDAR and camera units mounted on separate robots.
+          (b) Online estimation during operation. (c) Final estimated trajectories.</figcaption>
+      </figure>
     </section>
-
-    <footer>
-      <strong>FREE-LIVO</strong>
-      <span>ICRA 2027</span>
-    </footer>
   </main>
 </body>
 
